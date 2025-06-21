@@ -1,1 +1,1 @@
-# competitive-programming-library
+# kyopro-library
