@@ -1,3 +1,4 @@
+// https://github.com/seiyo1/kyopro-library/blob/main/data_structures/rangeset.hpptemplate <typename T>
 template <typename T>
 struct rangeset {
   set<pair<T, T>> s;
