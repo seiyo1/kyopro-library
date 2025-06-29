@@ -1,4 +1,16 @@
 // https://github.com/seiyo1/kyopro-library/blob/main/data_structures/cumsumND.hpp
+/*
+多次元累積和
+add({x,y,z},val);　座標(x,y,z)(0-indexed)にvalを加算
+build();    累積和を構築
+query({lx,ly,lz},{rx,ry,rz}); 0-indexedの[l,r)の総和を取得
+
+例:
+  CumsumND<2, int> cs({H, W}); // 2次元H×Wの累積和
+  cs.add({y, x}, val);              // (y, x) に val を加算
+  cs.build();                       // 累積和を構築
+  auto sum = cs.query({y1, x1}, {y2, x2}); // 矩形[y1,y2)×[x1,x2) の和を取得
+*/
 template<int Dim, typename T>
 struct CumsumND {
     vector<int> sizes;  
