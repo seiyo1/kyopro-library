@@ -1,3 +1,4 @@
+// https://github.com/seiyo1/kyopro-library/blob/main/data_structures/cumsumND.hpp
 template<int Dim, typename T>
 struct CumsumND {
     vector<int> sizes;  
