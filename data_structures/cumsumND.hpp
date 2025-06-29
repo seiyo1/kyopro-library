@@ -6,17 +6,17 @@ build();    累積和を構築
 query({lx,ly,lz},{rx,ry,rz}); 0-indexedの[l,r)の総和を取得
 
 例:
-  CumsumND<2, int> cs({H, W}); // 2次元H×Wの累積和
+  cumsumND<2, int> cs({H, W}); // 2次元H×Wの累積和
   cs.add({y, x}, val);              // (y, x) に val を加算
   cs.build();                       // 累積和を構築
   auto sum = cs.query({y1, x1}, {y2, x2}); // 矩形[y1,y2)×[x1,x2) の和を取得
 */
 template<int Dim, typename T>
-struct CumsumND {
+struct cumsumND {
     vector<int> sizes;  
     vector<T> data;     
 
-    CumsumND(const vector<int>& _sizes) : sizes(_sizes) {
+    cumsumND(const vector<int>& _sizes) : sizes(_sizes) {
         assert(sizes.size() == Dim);
         int total_size = 1;
         for (int sz : sizes) total_size *= (sz + 1); // 1-indexed化
