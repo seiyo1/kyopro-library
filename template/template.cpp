@@ -34,6 +34,13 @@ template <typename T>
 void read_single(T &x) {
   cin >> x;
 }
+
+template <typename T, typename... Ts>
+void read_single(T &x, Ts &...xs) {
+  cin >> x;
+  read_single(xs...);
+}
+
 #define INT(...)   \
   int __VA_ARGS__; \
   read_single(__VA_ARGS__)
@@ -73,7 +80,7 @@ void write_single(const T &x, const Ts &...xs) {
 template <typename T>
 void write_single(const vector<vector<T>> &m) {
   for (size_t i = 0; i < m.size(); ++i) {
-    write_single(mat[i]);
+    write_single(m[i]);
     cout << '\n';
   }
 }
