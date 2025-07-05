@@ -1,5 +1,6 @@
+// https://github.com/seiyo1/kyopro-library/blob/main/graph/dijkstra.hpp
 template<typename T>
-vector<T> dijkstra(const vvec<P>& g, int start) {
+vector<T> dijkstra(const vector<vector<pair<int,T>>& g, int start) {
     int n = g.size();
     const T INF = numeric_limits<T>::max();
     vector<T> dist(n, INF);
