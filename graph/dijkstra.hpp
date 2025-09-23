@@ -1,8 +1,8 @@
-// https://github.com/seiyo1/kyopro-library/blob/main/graph/dijkstra.hpp
-vector<ll> dijkstra(const vector<vector<P>> &g, ll start) {
+vector<ll> dijkstra(const vector<vector<pair<ll, ll>>> &g, ll start) {
   int n = (int)g.size();
-  vector<ll> dist(n, INF);
-  priority_queue<P, vector<P>, greater<P>> pq;
+  vector<ll> dist(n, LLONG_MAX / 4);
+  priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>>
+      pq;
   dist[start] = 0;
   pq.emplace(0, start);
   while (!pq.empty()) {
