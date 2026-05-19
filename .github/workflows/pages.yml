@@ -33,7 +33,7 @@ jobs:
         run: python -m pip install -r requirements.txt
 
       - name: Compile headers
-        run: g++ -std=c++17 -Wall -Wextra -pedantic tests/compile.cpp -o /tmp/compile-test && /tmp/compile-test
+        run: g++ -std=c++17 -Wall -Wextra -pedantic -I library tests/compile.cpp -o /tmp/compile-test && /tmp/compile-test
 
       - name: Test expander
         run: python3 tools/expand.py tests/compile.cpp -o /tmp/expanded.cpp && g++ -std=c++17 -Wall -Wextra -pedantic /tmp/expanded.cpp -o /tmp/expanded-test && /tmp/expanded-test

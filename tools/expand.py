@@ -38,6 +38,9 @@ class Expander:
                 return path.resolve()
         return None
 
+    def should_expand_angle_include(self, name: str) -> bool:
+        return name.startswith("graph/")
+
     def expand_file(self, path: Path, is_entry: bool = False) -> list[str]:
         path = path.resolve()
         if not is_entry:
@@ -56,7 +59,7 @@ class Expander:
                 continue
 
             bracket, name = match.groups()
-            if bracket == "<":
+            if bracket == "<" and not self.should_expand_angle_include(name):
                 out.append(line)
                 continue
 

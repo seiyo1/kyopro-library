@@ -1,6 +1,6 @@
 #include <cassert>
 
-#include "../library/graph/dijkstra.hpp"
+#include "graph/dijkstra.hpp"
 
 int main() {
   yz::Dijkstra<long long> graph(3);
