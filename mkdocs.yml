@@ -1,0 +1,32 @@
+site_name: Kyopro Library
+site_description: Competitive programming library notes and C++ snippets
+repo_url: https://github.com/seiyo1/kyopro-library
+
+theme:
+  name: material
+  language: ja
+  features:
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.sections
+    - content.code.copy
+    - content.code.select
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.snippets:
+      base_path: .
+      check_paths: true
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Graph:
+      - Dijkstra: graph/dijkstra.md
