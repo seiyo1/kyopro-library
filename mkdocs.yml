@@ -30,6 +30,8 @@ nav:
   - Home: index.md
   - Graph:
       - Dijkstra: graph/dijkstra.md
+  - Math:
+      - Matrix: math/matrix.md
   - String:
       - Aho-Corasick: string/aho_corasick.md
       - Trie: string/trie.md

@@ -1,6 +1,7 @@
 #include <cassert>
 
 #include "graph/dijkstra.hpp"
+#include "math/matrix.hpp"
 #include "string/aho_corasick.hpp"
 #include "string/trie.hpp"
 
@@ -42,4 +43,20 @@ int main() {
   assert(saw_he);
   assert(saw_she);
   assert(saw_hers);
+
+  yz::Matrix<long long> mat(2, 2);
+  mat[0][0] = 1;
+  mat[0][1] = 1;
+  mat[1][0] = 1;
+  mat[1][1] = 0;
+  auto squared = mat * mat;
+  assert(squared[0][0] == 2);
+  assert(squared[0][1] == 1);
+  assert(squared[1][0] == 1);
+  assert(squared[1][1] == 1);
+  auto powered = mat ^ 5;
+  assert(powered[0][0] == 8);
+  assert(powered[0][1] == 5);
+  assert(powered[1][0] == 5);
+  assert(powered[1][1] == 3);
 }

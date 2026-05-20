@@ -8,38 +8,53 @@ from pathlib import Path
 
 
 INCLUDE_RE = re.compile(r'^\s*#\s*include\s*([<"])([^>"]+)[>"]')
+DEFAULT_REPO_ROOT = Path(__file__).resolve().parents[1]
+
+
+def is_relative_to(path: Path, base: Path) -> bool:
+    try:
+        path.relative_to(base)
+        return True
+    except ValueError:
+        return False
 
 
 def find_repo_root(path: Path) -> Path:
+    script_path = Path(__file__).resolve()
     cur = path.resolve()
     if cur.is_file():
         cur = cur.parent
     while cur != cur.parent:
-        if (cur / "library").is_dir():
+        if (
+            (cur / "library").is_dir()
+            and (cur / "tools" / "expand.py").resolve() == script_path
+        ):
             return cur
         cur = cur.parent
-    return path.resolve().parent
+    return DEFAULT_REPO_ROOT.resolve()
 
 
 class Expander:
     def __init__(self, repo_root: Path):
         self.repo_root = repo_root.resolve()
+        self.library_root = self.repo_root / "library"
         self.included: set[Path] = set()
 
     def resolve_local_include(self, name: str, current_file: Path) -> Path | None:
         candidates = [
             current_file.parent / name,
             self.repo_root / "library" / name,
-            self.repo_root / name,
         ]
 
         for path in candidates:
-            if path.exists() and path.is_file():
-                return path.resolve()
+            path = path.resolve()
+            if (
+                path.exists()
+                and path.is_file()
+                and is_relative_to(path, self.library_root)
+            ):
+                return path
         return None
-
-    def should_expand_angle_include(self, name: str) -> bool:
-        return name.startswith(("graph/", "string/"))
 
     def expand_file(self, path: Path, is_entry: bool = False) -> list[str]:
         path = path.resolve()
@@ -58,10 +73,7 @@ class Expander:
                 out.append(line)
                 continue
 
-            bracket, name = match.groups()
-            if bracket == "<" and not self.should_expand_angle_include(name):
-                out.append(line)
-                continue
+            _, name = match.groups()
 
             include_path = self.resolve_local_include(name, path)
             if include_path is None:
@@ -89,7 +101,7 @@ def main() -> int:
     parser.add_argument(
         "--root",
         type=Path,
-        help="Repository root. Defaults to the nearest parent containing library/.",
+        help="Repository root. Defaults to this kyopro-library repository.",
     )
     args = parser.parse_args()
 
