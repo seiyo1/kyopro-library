@@ -29,8 +29,8 @@ class Expander:
     def resolve_local_include(self, name: str, current_file: Path) -> Path | None:
         candidates = [
             current_file.parent / name,
-            self.repo_root / name,
             self.repo_root / "library" / name,
+            self.repo_root / name,
         ]
 
         for path in candidates:
@@ -39,7 +39,7 @@ class Expander:
         return None
 
     def should_expand_angle_include(self, name: str) -> bool:
-        return name.startswith("graph/")
+        return name.startswith(("graph/", "string/"))
 
     def expand_file(self, path: Path, is_entry: bool = False) -> list[str]:
         path = path.resolve()
