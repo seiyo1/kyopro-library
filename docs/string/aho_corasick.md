@@ -137,7 +137,7 @@ flowchart TB
   linkStyle 0,1,2,3,4,5,6,7,8 stroke:#2563eb,stroke-width:2px;
 ```
 
-`build()` では BFS で浅いノードから順に `fail` を決めます。
+`build()` では BFS で浅いノード から順に `fail` を決めます。
 たとえば `sh` の `fail` は `h` なので、`she` の `fail` は
 `h` から `e` で進んだ `he` になります。
 
